@@ -1,0 +1,21 @@
+// Core variables and mixins
+@import "variables.scss";
+@import "mixins.scss";
+// Global CSS
+@import "global.scss";
+@import "nav.scss";
+@import "resume-item.scss";
+
+@import "~bootstrap/scss/bootstrap";
+
+@import "bootstrap-overrides.scss";
+
+
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome.scss";
+
+$devicons-font-path: "~devicons/fonts";
+@import "~devicons/css/devicons.scss";
+
+$simple-line-font-path: "~simple-line-icons/fonts/";
+@import "~simple-line-icons/scss/simple-line-icons.scss";

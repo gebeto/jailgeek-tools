@@ -1,0 +1,18 @@
+.bg-primary {
+  // background-color: $primary !important;
+  background: linear-gradient(to top, $jailgeek-gradient-bottom, $jailgeek-gradient-top) !important;
+  // background: red;
+}
+
+.text-primary {
+  color: $primary !important;
+}
+
+a {
+  color: $primary;
+  &:hover,
+  &:focus,
+  &:active {
+    color: darken($primary, 15%);
+  }
+}
