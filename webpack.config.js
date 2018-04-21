@@ -17,6 +17,11 @@ const config = {
 				loader: 'babel-loader',
 			},
 			{
+				test: /\.ts$/,
+				exclude: /node_modules/,
+				loader: 'awesome-typescript-loader',
+			},
+			{
 				test: /\.(scss|sass)$/,
 				exclude: /node_modules/,
 				use: ExtractPlugin.extract({
