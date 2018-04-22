@@ -7,10 +7,10 @@
     "license": "MIT",
     "author": "",
     "scripts": {
-        "build": "webpack -p && npm run build:tools",
+        "build": "webpack -p && npm run build:generators",
         "watch": "webpack -d --watch",
-        "build:tools": "webpack -p --config webpack.tools.config.js",
-        "watch:tools": "webpack -d --watch --config webpack.tools.config.js"
+        "build:generators": "webpack -p --config webpack.generators.config.js",
+        "watch:generators": "webpack -d --watch --config webpack.generators.config.js"
     },
     "repository": {},
     "dependencies": {},

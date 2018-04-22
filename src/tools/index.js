@@ -1,1 +1,0 @@
-import wallpaper from './wallpaper/';

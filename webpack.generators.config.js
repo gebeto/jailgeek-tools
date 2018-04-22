@@ -2,10 +2,10 @@ const path = require('path');
 
 
 const config = {
-	entry: './src/tools/index.js',
+	entry: './src/generators/index.js',
 	output: {
 		path: path.resolve(__dirname, 'assets'),
-		filename: 'bundle.tools.js'
+		filename: 'bundle.generators.js'
 	},
 
 	module: {
