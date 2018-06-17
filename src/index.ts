@@ -55,6 +55,31 @@ function generateText(text: string) {
 
 (document.querySelector(".content-wrapper") as HTMLElement).appendChild(content);
 
+
+class Observable {
+	offset: number;
+
+	current?: number;
+	callback: any;
+
+	constructor(offset: number) {
+		this.offset = offset;
+	}
+
+	withOffset(cb: any) {
+		if (cb === this.callback) {
+			clearTimeout(this.current);
+		}
+		this.callback = cb;
+		this.current = setTimeout(() => {
+			cb();
+		}, this.offset);
+	}
+}
+
+const updateObserver = new Observable(2000);
+
+
 function updateCanvas() {
 	HTML2Canvas(content).then(function(canvas) {
 		wrapper.innerHTML = "";
@@ -64,18 +89,18 @@ function updateCanvas() {
 	});
 }
 
-let canUpdate = true;
+
 const wrapper = (document.querySelector("#post-wrapper") as HTMLElement);
 const textInput = document.querySelector("textarea")!;
 const tagInput = document.querySelector("input")!;
 textInput.addEventListener("input", function(e) {
 	text.innerHTML = generateText(textInput.value);
-	updateCanvas();
+	updateObserver.withOffset(updateCanvas);
 });
 
 tagInput.addEventListener("input", function(e) {
 	tag.innerHTML = "#" + generateText(tagInput.value);
-	updateCanvas();
+	updateObserver.withOffset(updateCanvas);
 });
 
 updateCanvas();
