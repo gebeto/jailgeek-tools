@@ -57,10 +57,7 @@ function generateText(text: string) {
 
 function updateCanvas() {
 	HTML2Canvas(content).then(function(canvas) {
-		// canvas.setAttribute("style", "");
 		wrapper.innerHTML = "";
-		// wrapper.appendChild(canvas);
-
 		const image = document.createElement('img');
 		image.src = canvas.toDataURL();
 		wrapper.appendChild(image);
