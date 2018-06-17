@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="user-scalable=no, width=device-width">
 	<title>Jailgeek tools</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
@@ -11,15 +12,74 @@
 			width: 100%;
 		}
 	</style>
+
+	<style>
+		.content-wrapper {
+			opacity: 0;
+			width: 0px;
+			height: 0px;
+			overflow: hidden;
+		}
+
+		.content {
+			background: red;
+			width: 1500px;
+			height: 1000px;
+			position: relative;
+		}
+
+		.content span.tag {
+			position: absolute;
+			font-family: Archive;
+			left: 100px;
+			bottom: 110px;
+			font-size: 100px;
+			color: #3C4D60;
+		}
+
+		.content span.text {
+			position: absolute;
+			font-family: 'SF Display';
+			left: 100px;
+			top: 130px;
+			font-size: 119px;
+			letter-spacing: 0.6px;
+			color: #3C4D60;
+			line-height: 146px;
+		}
+
+		.content span.text .blue {
+			font-size: 119px;
+			letter-spacing: 0.6px;
+			color: #3880D3;
+			line-height: 146px;
+		}
+
+	</style>
 </head>
 <body>
-	<h1>Hello world!!</h1>
+
 	<div class="container-fluid">
 		<div class="row">
 			<div id="post-wrapper" class="col-sm-6">
-				<canvas width="1500" height="1000" id="test-canvas"></canvas>
+				<canvas width="1500" height="1000"></canvas>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label>Текст</label>
+					<textarea row="3" placeholder="Текст" class="form-control"></textarea>
+				</div>
+				<div class="form-group">
+					<label>Тег</label>
+					<input row="3" placeholder="Тег" class="form-control" />
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary">Generate</button>
+				</div>
+				<div class="content-wrapper"></div>
 			</div>
 		</div>
 	</div>
+
 <script type="text/javascript" src="bundle.js"></script></body>
 </html>

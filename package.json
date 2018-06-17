@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/gebeto/jailgeek-tools#readme",
   "devDependencies": {
+    "@types/html2canvas": "^0.0.33",
     "@types/pixi.js": "^4.7.5",
     "awesome-typescript-loader": "^5.0.0",
     "copy-webpack-plugin": "^4.5.1",
@@ -35,6 +36,7 @@
     "@types/opentype.js": "^0.7.0",
     "@types/webfontloader": "^1.6.29",
     "file-loader": "^1.1.11",
+    "html2canvas": "^1.0.0-alpha.12",
     "opentype.js": "^0.8.0",
     "pixi.js": "^4.8.1",
     "resource-loader": "^2.1.1",

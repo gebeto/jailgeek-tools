@@ -1,7 +1,4 @@
-import { ImageLoader } from './ImageLoader';
-import { FontLoader } from './FontLoader';
-
-import * as OpenType from 'opentype.js';
+import HTML2Canvas from 'html2canvas';
 
 import backgroundImage from './assets/post-bg.png';
 import testImage from './assets/test.png';
@@ -9,96 +6,79 @@ import testImage from './assets/test.png';
 import fontSFDisplay from './assets/SFUIDisplayBlack.otf';
 import fontArchive from './assets/Archive.otf';
 
-import { RichText } from './drawers/';
 
-const bg = ImageLoader(backgroundImage);
-const test = ImageLoader(testImage);
-const SFDisplay = FontLoader(fontSFDisplay);
-const Archive = FontLoader(fontArchive);
-
-// ImageLoader(testImage).then((image) => {
-// 	(document.querySelector("#post-wrapper") as HTMLElement).appendChild(image);
-// });
-
-
-Promise.all([
-	// bg,
-	test,
-	SFDisplay,
-	Archive,
-]).then(([bg, SFDisplay, Archive]) => {
-	const canvas = <HTMLCanvasElement>document.getElementById("test-canvas");
-	const ctx = <CanvasRenderingContext2D>canvas.getContext("2d");
-
-	ctx.drawImage(bg, 0, 0);
-
-	const letterSpacing = 0.6;
-
-	// function drawText(text: string, x: number, y: number, fontSize: number) {
-	// 	text.split("\n").forEach((line, lineIndex) => {
-	// 		let lineSpacing = (fontSize * lineIndex) + fontSize / 4.4 * lineIndex;
-	// 		let prevWord: OpenType.BoundingBox;
-	// 		line.split(" ").map((word, wordIndex, arr) => {
-	// 			console.log(arr)
-	// 			let index = lineIndex * wordIndex;
-
-	// 			let fill = "#3C4D60";
-	// 			function drawWord(word: string, wordIndex: number) {
-	// 				if (word.match(/\*\w+\*/)) {
-	// 					word = word.replace(/\*(\w+)\*/, "$1");
-	// 					fill = "#3880D3";
-	// 				} else {
-	// 					fill = "#3C4D60";
-	// 				}
-	// 				let x = 0;
-
-	// 				if (prevWord) {
-	// 					x = prevWord.x2! - 72;
-	// 				}
-	// 				const t = getPathWithLetterSpacing(SFDisplay.getPaths(word, 100 + x - (word.match(/\./) ? 26 : 0), 244 + (lineIndex ? lineSpacing : 0), fontSize), letterSpacing);
-	// 				prevWord = t.getBoundingBox();
-	// 				t.fill = fill;
-	// 				t.draw(ctx);
-	// 			}
-	// 			if (word.match(/\*\w+\*/)) {
-	// 				word = word.replace(/\*(\w+)\*/, "*$1* ");
-	// 				word.split(" ").forEach((chunk, index) => {
-	// 					drawWord(chunk, wordIndex + index);
-	// 				})
-	// 			} else {
-	// 				drawWord(word, wordIndex);
-	// 			}
-
-	// 		});
-	// 	});
-	// }
-
-	interface Drawable {
-		draw(ctx: CanvasRenderingContext2D): void;
+const fonts = document.createElement("style");
+fonts.innerHTML = `
+	@font-face {
+		font-family: Archive;
+		src: url(${fontArchive});
 	}
-
-
-	function drawText(text: string, x: number, y: number, fontSize: number) {
-		const rich = new RichText(SFDisplay, text, x, y);
-		console.log(rich);
-		rich.draw(ctx);
+	@font-face {
+		font-family: SF Display;
+		src: url(${fontSFDisplay});
 	}
+`;
+document.head.appendChild(fonts);
 
-	drawText("Мы поможем вам\nсохранить *shsh*. and", 100, 244, 119);
-	// drawText("a", 100, 244, 119);
 
-	// const line1 = getPathWithLetterSpacing(SFDisplay.getPaths("Мы поможем вам", 100, 244, 119), letterSpacing);
-	// line1.fill = "#3C4D60";
-	// line1.draw(ctx);
-	
-	// const line2 = getPathWithLetterSpacing(SFDisplay.getPaths("сохранить shsh", 100, 390, 119), letterSpacing);
-	// line2.fill = "#3C4D60";
-	// line2.draw(ctx);
 
-	// const line3 = getPathWithLetterSpacing(SFDisplay.getPaths("сохранить shsh", 100, 390, 119), letterSpacing);
-	// line3.fill = "#3880D3";
-	// line3.draw(ctx);
+// Мы поможем вам\nсохранить *shsh*.
 
-	// console.log(line1)
+// WRAPPER
+const content = document.createElement("div")
+content.className = "content";
 
+// BG
+const img = document.createElement("img");
+img.src = backgroundImage;
+// img.src = testImage;
+
+const tag = document.createElement("span");
+tag.className = "tag";
+tag.textContent = "#";
+
+const text = document.createElement("span");
+text.className = "text";
+text.innerHTML = "";
+
+content.appendChild(img);
+content.appendChild(tag);
+content.appendChild(text);
+
+
+function generateText(text: string) {
+	// let result = text.replace(/\*([\sa-zA-Zа-яА-Яіїё]+?)\*/gi, '<span class="blue">$1</span>')
+	let result = text.replace(/\*(.+?)\*/gi, '<span class="blue">$1</span>')
+	return result;
+}
+
+
+(document.querySelector(".content-wrapper") as HTMLElement).appendChild(content);
+
+function updateCanvas() {
+	HTML2Canvas(content).then(function(canvas) {
+		// canvas.setAttribute("style", "");
+		wrapper.innerHTML = "";
+		// wrapper.appendChild(canvas);
+
+		const image = document.createElement('img');
+		image.src = canvas.toDataURL();
+		wrapper.appendChild(image);
+	});
+}
+
+let canUpdate = true;
+const wrapper = (document.querySelector("#post-wrapper") as HTMLElement);
+const textInput = document.querySelector("textarea")!;
+const tagInput = document.querySelector("input")!;
+textInput.addEventListener("input", function(e) {
+	text.innerHTML = generateText(textInput.value);
+	updateCanvas();
 });
+
+tagInput.addEventListener("input", function(e) {
+	tag.innerHTML = "#" + generateText(tagInput.value);
+	updateCanvas();
+});
+
+updateCanvas();
