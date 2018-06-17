@@ -1,0 +1,1 @@
+export const LETTER_SPACING = 0.6;

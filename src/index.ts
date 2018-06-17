@@ -1,11 +1,15 @@
 import { ImageLoader } from './ImageLoader';
-import { FontLoader, drawLettersWithSpacing, getPathWithLetterSpacing } from './FontLoader';
+import { FontLoader } from './FontLoader';
+
+import * as OpenType from 'opentype.js';
 
 import backgroundImage from './assets/post-bg.png';
 import testImage from './assets/test.png';
 
 import fontSFDisplay from './assets/SFUIDisplayBlack.otf';
 import fontArchive from './assets/Archive.otf';
+
+import { TextRich } from './drawers/';
 
 const bg = ImageLoader(backgroundImage);
 const test = ImageLoader(testImage);
@@ -30,16 +34,58 @@ Promise.all([
 
 	const letterSpacing = 0.6;
 
-	function drawText(text: string, x: number, y: number, fontSize: number) {
-		text.split("\n").forEach((t, index) => {
-			let lineSpacing = fontSize + fontSize / 4.4 * index;
-			const line1 = getPathWithLetterSpacing(SFDisplay.getPaths(t, 100, 244 + (index ? lineSpacing : 0), fontSize), letterSpacing);
-			line1.fill = "#3C4D60";
-			line1.draw(ctx);
-		});
+	// function drawText(text: string, x: number, y: number, fontSize: number) {
+	// 	text.split("\n").forEach((line, lineIndex) => {
+	// 		let lineSpacing = (fontSize * lineIndex) + fontSize / 4.4 * lineIndex;
+	// 		let prevWord: OpenType.BoundingBox;
+	// 		line.split(" ").map((word, wordIndex, arr) => {
+	// 			console.log(arr)
+	// 			let index = lineIndex * wordIndex;
+
+	// 			let fill = "#3C4D60";
+	// 			function drawWord(word: string, wordIndex: number) {
+	// 				if (word.match(/\*\w+\*/)) {
+	// 					word = word.replace(/\*(\w+)\*/, "$1");
+	// 					fill = "#3880D3";
+	// 				} else {
+	// 					fill = "#3C4D60";
+	// 				}
+	// 				let x = 0;
+
+	// 				if (prevWord) {
+	// 					x = prevWord.x2! - 72;
+	// 				}
+	// 				const t = getPathWithLetterSpacing(SFDisplay.getPaths(word, 100 + x - (word.match(/\./) ? 26 : 0), 244 + (lineIndex ? lineSpacing : 0), fontSize), letterSpacing);
+	// 				prevWord = t.getBoundingBox();
+	// 				t.fill = fill;
+	// 				t.draw(ctx);
+	// 			}
+	// 			if (word.match(/\*\w+\*/)) {
+	// 				word = word.replace(/\*(\w+)\*/, "*$1* ");
+	// 				word.split(" ").forEach((chunk, index) => {
+	// 					drawWord(chunk, wordIndex + index);
+	// 				})
+	// 			} else {
+	// 				drawWord(word, wordIndex);
+	// 			}
+
+	// 		});
+	// 	});
+	// }
+
+	interface Drawable {
+		draw(ctx: CanvasRenderingContext2D): void;
 	}
 
-	drawText("Мы поможем вам\nсохранить shsh", 100, 244, 119);
+
+	function drawText(text: string, x: number, y: number, fontSize: number) {
+		const rich = new TextRich(SFDisplay, text, x, y);
+		console.log(rich);
+		rich.draw(ctx);
+	}
+
+	drawText("Мы поможем вам\nсохранить *shsh*.", 100, 244, 119);
+	// drawText("a b d \na *b*.", 100, 244, 119);
 
 	// const line1 = getPathWithLetterSpacing(SFDisplay.getPaths("Мы поможем вам", 100, 244, 119), letterSpacing);
 	// line1.fill = "#3C4D60";
