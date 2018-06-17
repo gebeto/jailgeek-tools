@@ -9,7 +9,7 @@ import testImage from './assets/test.png';
 import fontSFDisplay from './assets/SFUIDisplayBlack.otf';
 import fontArchive from './assets/Archive.otf';
 
-import { TextRich } from './drawers/';
+import { RichText } from './drawers/';
 
 const bg = ImageLoader(backgroundImage);
 const test = ImageLoader(testImage);
@@ -79,13 +79,13 @@ Promise.all([
 
 
 	function drawText(text: string, x: number, y: number, fontSize: number) {
-		const rich = new TextRich(SFDisplay, text, x, y);
+		const rich = new RichText(SFDisplay, text, x, y);
 		console.log(rich);
 		rich.draw(ctx);
 	}
 
-	drawText("Мы поможем вам\nсохранить *shsh*.", 100, 244, 119);
-	// drawText("a b d \na *b*.", 100, 244, 119);
+	drawText("Мы поможем вам\nсохранить *shsh*. and", 100, 244, 119);
+	// drawText("a", 100, 244, 119);
 
 	// const line1 = getPathWithLetterSpacing(SFDisplay.getPaths("Мы поможем вам", 100, 244, 119), letterSpacing);
 	// line1.fill = "#3C4D60";

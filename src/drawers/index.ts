@@ -1,3 +1,3 @@
-export { TextRich } from './TextRich';
-export { TextLine } from './TextLine';
-export { TextWord } from './TextWord';
+export { RichText } from './RichText';
+export { Line } from './Line';
+export { Word } from './Word';

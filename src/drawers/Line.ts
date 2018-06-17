@@ -1,5 +1,5 @@
 import { Drawable } from './interfaces';
-import { TextWord } from './TextWord';
+import { Word as TextWord } from './Word';
 
 import * as OpenType from 'opentype.js';
 import { getPathWithLetterSpacing } from './addons';
@@ -7,7 +7,7 @@ import { LETTER_SPACING } from './config';
 
 
 
-export class TextLine implements Drawable {
+export class Line implements Drawable {
 	index: number;
 	font: OpenType.Font;
 	text: string;
@@ -22,13 +22,13 @@ export class TextLine implements Drawable {
 		this.x = x;
 		this.y = y;
 
-		let leftOffset = 0;
 		let wordY = y + this.index * 144;
 		let wordX = x;
 		this.words = this.text.split(" ").map((text, index) => {
 			wordX += leftOffset + (index ? 30 : 0);
-			leftOffset = getPathWithLetterSpacing(this.font.getPaths(text, 0, 0, 119), LETTER_SPACING).getBoundingBox().x2!;
-			return new TextWord(font, text, wordX, wordY)
+			const result = new TextWord(font, text, wordX, wordY);
+			leftOffset = result.width;
+			return ;
 		});
 	}
 
