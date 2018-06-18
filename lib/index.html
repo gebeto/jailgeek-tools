@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+</head>
+<body>
+	<textarea id="post-text"></textarea>
+	<input id="post-hash" type="text">
+	<button id="post-generate">Generate</button>
+	
+	<style>
+		#result-wrapper img {
+			width: 500px;
+		}
+	</style>
+	<div id="result-wrapper"></div>
+
+	<script src="PostGenerator.js"></script>
+	<script>
+		// CreatePostGenerator(, , );
+		CreatePostGenerator({
+			postFontPath: "./assets/SFUIDisplayBlack.otf",
+			hashFontPath: "./assets/Archive.otf",
+			backgroundImagePath: "./assets/post-bg.png",
+
+			resultImageWrapper: document.getElementById("result-wrapper"),
+
+			postInput: document.getElementById("post-text"),
+			hashInput: document.getElementById("post-hash"),
+			generateButton: document.getElementById("post-generate"),
+
+			updateOffset: 1000,
+		});
+</script>
+</body>
+</html>
