@@ -75,6 +75,13 @@ class Observable {
 			cb();
 		}, this.offset);
 	}
+
+	withoutOffset(cb: any) {
+		if (cb === this.callback) {
+			clearTimeout(this.current);
+		}
+		cb();
+	}
 }
 
 const updateObserver = new Observable(2000);
@@ -93,6 +100,7 @@ function updateCanvas() {
 const wrapper = (document.querySelector("#post-wrapper") as HTMLElement);
 const textInput = document.querySelector("textarea")!;
 const tagInput = document.querySelector("input")!;
+const generateInput = document.querySelector("button")!;
 textInput.addEventListener("input", function(e) {
 	text.innerHTML = generateText(textInput.value);
 	updateObserver.withOffset(updateCanvas);
@@ -101,6 +109,10 @@ textInput.addEventListener("input", function(e) {
 tagInput.addEventListener("input", function(e) {
 	tag.innerHTML = "#" + generateText(tagInput.value);
 	updateObserver.withOffset(updateCanvas);
+});
+
+generateInput.addEventListener("click", function () {
+	updateObserver.withoutOffset(updateCanvas);
 });
 
 updateCanvas();
