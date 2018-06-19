@@ -52,6 +52,20 @@ export function injectStyles() {
 			position: relative;
 		}
 
+		.post__text {
+			position: absolute;
+			font-family: 'SF Display';
+			width: 100%;
+			height: 100%;
+			left: 0px;
+			top: 0px;
+			padding: 130px 100px;
+			font-size: 119px;
+			letter-spacing: 0.6px;
+			color: #3C4D60;
+			line-height: 146px;
+		}
+
 		.post__tag {
 			position: absolute;
 			font-family: Archive;
@@ -59,17 +73,6 @@ export function injectStyles() {
 			bottom: 110px;
 			font-size: 100px;
 			color: #3C4D60;
-		}
-
-		.post__text {
-			position: absolute;
-			font-family: 'SF Display';
-			left: 100px;
-			top: 130px;
-			font-size: 119px;
-			letter-spacing: 0.6px;
-			color: #3C4D60;
-			line-height: 146px;
 		}
 
 		.post__text .blue {
@@ -85,7 +88,7 @@ export function injectStyles() {
 
 export function CreatePostGenerator(props: CreatePostGeneratorProps) {
 	function generateText(text: string) {
-		let result = text.replace(/\*(.+?)\*/gi, '<span class="blue">$1</span>')
+		let result = text.replace(/\*(.+?)\*/gi, '<span class="blue">$1</span>').replace("\n", "<br />")
 		return result;
 	}
 
