@@ -89,7 +89,7 @@ export function injectStyles() {
 
 export function CreatePostGenerator(props: CreatePostGeneratorProps) {
 	function generateText(text: string) {
-		let result = text.replace(/\*(.+?)\*/gi, '<span class="blue">$1</span>').replace("\n", "<br />")
+		let result = text.replace(/\*(.+?)\*/gi, '<span class="blue">$1</span>').replace(/\n/g, "<br />")
 		return result;
 	}
 
