@@ -59,6 +59,7 @@ export function injectStyles() {
 			height: 100%;
 			left: 0px;
 			top: 0px;
+			box-sizing: border-box;
 			padding: 130px 100px;
 			font-size: 119px;
 			letter-spacing: 0.6px;
