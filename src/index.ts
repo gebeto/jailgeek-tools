@@ -12,7 +12,8 @@ CreatePostGenerator({
 	hashFontPath: fontArchive,
 	backgroundImagePath: backgroundImage,
 
-	resultImageWrapper: document.getElementById("post-wrapper") as HTMLElement,
+	// resultImageWrapper: document.getElementById("post-wrapper") as HTMLElement,
+	resultImage: document.getElementById("result-image") as HTMLImageElement,
 
 	postInput: document.querySelector("textarea") as HTMLTextAreaElement,
 	hashInput: document.querySelector("input") as HTMLInputElement,

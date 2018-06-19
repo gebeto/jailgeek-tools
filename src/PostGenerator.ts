@@ -7,7 +7,8 @@ export interface CreatePostGeneratorProps {
 	hashFontPath: string,
 	backgroundImagePath: string,
 
-	resultImageWrapper: HTMLElement;
+	// resultImageWrapper: HTMLElement;
+	resultImage: HTMLImageElement;
 
 	postInput: HTMLInputElement | HTMLTextAreaElement;
 	hashInput: HTMLInputElement | HTMLTextAreaElement;
@@ -127,14 +128,15 @@ export function CreatePostGenerator(props: CreatePostGeneratorProps) {
 	injectStyles();
 
 
-	const resultWrapper = props.resultImageWrapper;
+	// const resultWrapper = props.resultImageWrapper;
 	const offsetableUpdateCanvas = new Offsetable(props.updateOffset || 1000, function() {
 		const converter = html2canvas(content);
 		converter.then(function(canvas) {
-			resultWrapper.innerHTML = "";
-			const image = document.createElement('img');
-			image.src = canvas.toDataURL();
-			resultWrapper.appendChild(image);
+			props.resultImage.src = canvas.toDataURL();
+			// resultWrapper.innerHTML = "";
+			// const image = document.createElement('img');
+			// image.src = canvas.toDataURL();
+			// resultWrapper.appendChild(image);
 		});
 	});
 
@@ -142,12 +144,20 @@ export function CreatePostGenerator(props: CreatePostGeneratorProps) {
 	const tagInput = props.hashInput;
 	const generateInput = props.generateButton;
 
-	textInput.addEventListener("input", function(e) {
+	function getInputType(element: HTMLElement) {
+		let result = "input"
+		if (["select"].indexOf(element.tagName) > -1) {
+			result = "change";
+		}
+		return result;
+	}
+
+	textInput.addEventListener(getInputType(textInput), function(e) {
 		text.innerHTML = generateText(textInput.value);
 		offsetableUpdateCanvas.withOffset();
 	});
 
-	tagInput.addEventListener("input", function(e) {
+	tagInput.addEventListener(getInputType(tagInput), function(e) {
 		tag.innerHTML = "#" + generateText(tagInput.value);
 		offsetableUpdateCanvas.withOffset();
 	});

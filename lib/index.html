@@ -6,15 +6,26 @@
 </head>
 <body>
 	<textarea id="post-text"></textarea>
-	<input id="post-hash" type="text">
+
+	<!-- <input id="post-hash" type="text"> -->
+	<select id="post-hash">
+		<option></option>
+		<option>test</option>
+		<option>slavik</option>
+		<option>lalka</option>
+		<option>lolka</option>
+	</select>
+
 	<button id="post-generate">Generate</button>
 	
 	<style>
-		#result-wrapper img {
+		.result-image {
 			width: 500px;
 		}
 	</style>
-	<div id="result-wrapper"></div>
+	<div>
+		<img class="result-image" id="result-image">
+	</div>
 
 	<script src="PostGenerator.js"></script>
 	<script>
@@ -24,7 +35,8 @@
 			hashFontPath: "./assets/Archive.otf",
 			backgroundImagePath: "./assets/post-bg.png",
 
-			resultImageWrapper: document.getElementById("result-wrapper"),
+			// resultImageWrapper: document.getElementById("result-wrapper"),
+			resultImage: document.getElementById("result-image"),
 
 			postInput: document.getElementById("post-text"),
 			hashInput: document.getElementById("post-hash"),
