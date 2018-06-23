@@ -1,0 +1,2 @@
+import { CreateWallpapersGenerator } from './WallpapersGenerator';
+

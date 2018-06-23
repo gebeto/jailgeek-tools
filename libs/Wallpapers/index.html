@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+</head>
+<body>
+
+	<input id="wallpapers" type="file" multiple>
+
+	<div>
+		<img width="500" class="result-image" id="result-image">
+	</div>
+
+	<script src="WallpapersGenerator.js"></script>
+	<script>
+		CreateWallpapersGenerator({
+			fileInput: document.getElementById("wallpapers"),
+			resultImage: document.getElementById("result-image"),
+
+			w1: "assets/w_1.png",
+			w2: "assets/w_2.png",
+			w3: "assets/w_3.png",
+			w4: "assets/w_4.png",
+			w5: "assets/w_5.png",
+		});
+</script>
+</body>
+</html>

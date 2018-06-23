@@ -4,7 +4,7 @@ import testImage from './assets/test.png';
 import fontSFDisplay from './assets/SFUIDisplayBlack.otf';
 import fontArchive from './assets/Archive.otf';
 
-import { CreatePostGenerator } from './postGenerator';
+import { CreatePostGenerator } from './PostGenerator';
 
 
 CreatePostGenerator({

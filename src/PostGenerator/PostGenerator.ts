@@ -1,5 +1,7 @@
 import html2canvas from 'html2canvas';
-import { Offsetable } from './Offsetable';
+import { injectFonts, injectStyles } from '../Injectors';
+import { Offsetable } from '../Offsetable';
+import styles from './styles.css';
 
 
 export interface CreatePostGeneratorProps {
@@ -15,75 +17,6 @@ export interface CreatePostGeneratorProps {
 	generateButton: HTMLButtonElement;
 
 	updateOffset?: number;
-}
-
-
-export interface FontArgs {
-	family: string;
-	url: string;
-}
-
-
-export function injectFonts(fontArgs: Array<FontArgs>) {	
-	const fonts = document.createElement("style");
-	fonts.innerHTML = fontArgs.map(font => `
-		@font-face {
-			font-family: ${font.family};
-			src: url(${font.url});
-		}
-	`).join("\n");
-	document.head.appendChild(fonts);
-}
-
-export function injectStyles() {
-	const styles = document.createElement("style");
-	styles.innerHTML = `
-		.post__content-wrapper {
-			opacity: 0;
-			width: 0px;
-			height: 0px;
-			overflow: hidden;
-		}
-
-		.post__content {
-			background: red;
-			width: 1500px;
-			height: 1000px;
-			position: relative;
-		}
-
-		.post__text {
-			position: absolute;
-			font-family: 'SF Display';
-			width: 100%;
-			height: 100%;
-			left: 0px;
-			top: 0px;
-			box-sizing: border-box;
-			padding: 130px 100px;
-			font-size: 119px;
-			letter-spacing: 0.6px;
-			color: #3C4D60;
-			line-height: 146px;
-		}
-
-		.post__tag {
-			position: absolute;
-			font-family: Archive;
-			left: 100px;
-			bottom: 110px;
-			font-size: 100px;
-			color: #3C4D60;
-		}
-
-		.post__text .blue {
-			font-size: 119px;
-			letter-spacing: 0.6px;
-			color: #3880D3;
-			line-height: 146px;
-		}
-	`;
-	document.head.appendChild(styles);
 }
 
 
@@ -114,7 +47,6 @@ export function CreatePostGenerator(props: CreatePostGeneratorProps) {
 	// BG
 	const img = document.createElement("img");
 	img.src = props.backgroundImagePath;
-	// img.src = testImage;
 
 	const tag = document.createElement("span");
 	tag.className = "post__tag";
@@ -129,18 +61,13 @@ export function CreatePostGenerator(props: CreatePostGeneratorProps) {
 	content.appendChild(text);
 	contentWrapper.appendChild(content);
 
-	injectStyles();
-
+	injectStyles(styles);
 
 	// const resultWrapper = props.resultImageWrapper;
 	const offsetableUpdateCanvas = new Offsetable(props.updateOffset || 1000, function() {
 		const converter = html2canvas(content);
 		converter.then(function(canvas) {
 			props.resultImage.src = canvas.toDataURL();
-			// resultWrapper.innerHTML = "";
-			// const image = document.createElement('img');
-			// image.src = canvas.toDataURL();
-			// resultWrapper.appendChild(image);
 		});
 	});
 

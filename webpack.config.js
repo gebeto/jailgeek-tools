@@ -3,19 +3,22 @@ const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const bundleConfig = {
-	entry: "src/index.ts",
+	entry: path.resolve(__dirname, "src/index.ts"),
 	output: "bundle.js",
 	isLib: false,
 }
 
 if (process.env.npm_lifecycle_event === "lib") {
-	bundleConfig.entry = "src/PostGenerator.ts";
-	bundleConfig.output = "../lib/PostGenerator.js";
+	bundleConfig.entry = {
+		Post: path.resolve(__dirname, "src/PostGenerator/PostGenerator.ts"),
+		Wallpapers: path.resolve(__dirname, "src/WallpapersGenerator/WallpapersGenerator.ts"),
+	};
+	bundleConfig.output = "../libs/[name]/[name]Generator.js";
 	bundleConfig.isLib = true;
 }
 
 const config = {
-	entry: path.resolve(__dirname, bundleConfig.entry),
+	entry: bundleConfig.entry,
 	output: {
 		path: path.resolve(__dirname, "dist"),
 		filename: bundleConfig.output,
@@ -34,6 +37,10 @@ const config = {
 			{
 				test: /\.html$/,
 				loader: "html-loader",
+			},
+			{
+				test: /\.css$/,
+				use: ["to-string-loader", "css-loader"]
 			},
 			{
 				test: /\.(jpg|png)$/,

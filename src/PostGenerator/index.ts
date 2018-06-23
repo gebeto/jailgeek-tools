@@ -1,0 +1,1 @@
+export { CreatePostGenerator } from './PostGenerator';

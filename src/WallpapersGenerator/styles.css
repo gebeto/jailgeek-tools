@@ -1,0 +1,33 @@
+/*.ww {
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+}
+*/
+.wallpapers__wrapper {
+	background: red;
+	width: 2400px;
+	height: 1600px;
+	position: relative;
+}
+
+.wallpapers__wrapper img {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+.wallpapers__wrapper img.portrait {
+	height: 100%;
+}
+.wallpapers__wrapper img.landscape {
+	width: 100%;
+}
+
+.wallpapers__img-wrapper {
+	position: absolute;
+	overflow: hidden;
+}
