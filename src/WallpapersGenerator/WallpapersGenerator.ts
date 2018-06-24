@@ -23,7 +23,11 @@ export function createImgWrapper(img: HTMLImageElement, orientation: Orientation
 	if (opts) {
 		imgWrapper.style.width = `${opts.width}px`;
 		imgWrapper.style.height = `${opts.height}px`;
-		imgWrapper.style.left = `${opts.left}px`;
+		if (opts.left) {
+			imgWrapper.style.left = `${opts.left}px`;
+		} else if (opts.right) {
+			imgWrapper.style.right = `${opts.right}px`;
+		}
 		imgWrapper.style.top = `${opts.top}px`;
 		if (orientation === Orientation.Portrait) {
 			const divider = img.height / opts.height;
@@ -100,12 +104,81 @@ export function generateWallpapers_3(wrapper: HTMLElement, imgs: Array<HTMLImage
 
 export function generateWallpapers_4(wrapper: HTMLElement, imgs: Array<HTMLImageElement>) {
 	console.log("generateWallpapers_4");
+	const img1 = createImgWrapper(imgs[0], Orientation.Portrait, {
+		width: 818,
+		height: 1640,
+		left: 160,
+		top: 760,
+	});
+	wrapper.appendChild(img1);
+
+	const img2 = createImgWrapper(imgs[1], Orientation.Portrait, {
+		width: 818,
+		height: 1640,
+		left: 608,
+		top: 580,
+	});
+	wrapper.appendChild(img2);
+
+	const img3 = createImgWrapper(imgs[2], Orientation.Portrait, {
+		width: 818,
+		height: 1640,
+		left: 1422,
+		top: 580,
+	});
+	wrapper.appendChild(img3);
+
+	const img4 = createImgWrapper(imgs[3], Orientation.Portrait, {
+		width: 818,
+		height: 1640,
+		left: 1015,
+		top: 318,
+	});
+	wrapper.appendChild(img4);
 }
 
 export function generateWallpapers_5(wrapper: HTMLElement, imgs: Array<HTMLImageElement>) {
 	console.log("generateWallpapers_5");
-}
+	const img1 = createImgWrapper(imgs[0], Orientation.Portrait, {
+		width: 600,
+		height: 1300,
+		left: 295,
+		top: 925,
+	});
+	wrapper.appendChild(img1);
 
+	const img2 = createImgWrapper(imgs[1], Orientation.Portrait, {
+		width: 600,
+		height: 1300,
+		left: 1515,
+		top: 925,
+	});
+	wrapper.appendChild(img2);
+
+	const img3 = createImgWrapper(imgs[2], Orientation.Portrait, {
+		width: 818,
+		height: 1640,
+		left: 463,
+		top: 645,
+	});
+	wrapper.appendChild(img3);
+
+	const img4 = createImgWrapper(imgs[3], Orientation.Portrait, {
+		width: 818,
+		height: 1640,
+		left: 1134,
+		top: 645,
+	});
+	wrapper.appendChild(img4);
+
+	const img5 = createImgWrapper(imgs[4], Orientation.Portrait, {
+		width: 818,
+		height: 1640,
+		left: 800,
+		top: 275,
+	});
+	wrapper.appendChild(img5);
+}
 
 export function draw(wrapper: HTMLElement, background: Promise<HTMLImageElement>, images: Promise<HTMLImageElement[]>) {
 	wrapper.innerHTML = '';
