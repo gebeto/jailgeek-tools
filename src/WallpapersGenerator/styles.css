@@ -1,9 +1,9 @@
-/*.ww {
-	width: 100px;
-	height: 100px;
+.ww {
+	width: 0px;
+	height: 0px;
 	overflow: hidden;
 }
-*/
+
 .wallpapers__wrapper {
 	background: red;
 	width: 2400px;

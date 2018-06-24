@@ -75,7 +75,7 @@ export function CreatePostGenerator(props: CreatePostGeneratorProps) {
 	const tagInput = props.hashInput;
 	const generateInput = props.generateButton;
 
-	function getInputType(element: HTMLElement) {
+	function getEventType(element: HTMLElement) {
 		let result = "input"
 		if (["select"].indexOf(element.tagName) > -1) {
 			result = "change";
@@ -83,12 +83,12 @@ export function CreatePostGenerator(props: CreatePostGeneratorProps) {
 		return result;
 	}
 
-	textInput.addEventListener(getInputType(textInput), function(e) {
+	textInput.addEventListener(getEventType(textInput), function(e) {
 		text.innerHTML = generateText(textInput.value);
 		offsetableUpdateCanvas.withOffset();
 	});
 
-	tagInput.addEventListener(getInputType(tagInput), function(e) {
+	tagInput.addEventListener(getEventType(tagInput), function(e) {
 		tag.innerHTML = "#" + generateText(tagInput.value);
 		offsetableUpdateCanvas.withOffset();
 	});
@@ -99,6 +99,19 @@ export function CreatePostGenerator(props: CreatePostGeneratorProps) {
 
 
 	offsetableUpdateCanvas.withoutOffset();
+
+	return {
+		setTag(hash: string) {
+			tagInput.value = hash;
+			tagInput.dispatchEvent(new Event(getEventType(tagInput)));
+			offsetableUpdateCanvas.withoutOffset();
+		},
+		setText(text: string) {
+			textInput.value = text;
+			textInput.dispatchEvent(new Event(getEventType(tagInput)));
+			offsetableUpdateCanvas.withoutOffset();
+		}
+	};
 }
 
 (window as any).CreatePostGenerator = CreatePostGenerator;
