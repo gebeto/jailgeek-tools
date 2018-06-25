@@ -5,14 +5,19 @@ import { loadImage, loadImageFromFile, checkOrientation, Orientation, scaleToFit
 
 
 export interface CreateWallpapersGeneratorProps {
-	fileInput: HTMLInputElement;
-	resultImage: HTMLImageElement;
+	w1_Input: HTMLInputElement;
+	w2_Input: HTMLInputElement;
+	w3_Input: HTMLInputElement;
+	w4_Input: HTMLInputElement;
+	w5_Input: HTMLInputElement;
 
 	w1: string;
 	w2: string;
 	w3: string;
 	w4: string;
 	w5: string;
+
+	resultImage: HTMLImageElement;
 }
 
 export function createImgWrapper(img: HTMLImageElement, orientation: Orientation, opts?: any) {
@@ -202,7 +207,6 @@ export function draw(wrapper: HTMLElement, background: Promise<HTMLImageElement>
 		});
 }
 
-
 export function CreateWallpapersGenerator(props: CreateWallpapersGeneratorProps) {
 	const ww = document.createElement("div");
 	ww.className = "ww";
@@ -214,15 +218,23 @@ export function CreateWallpapersGenerator(props: CreateWallpapersGeneratorProps)
 
 	injectStyles(styles);
 
-	props.fileInput.addEventListener("change", (e: any) => {
-		const tgt = e.target;
-		const files = e.target.files;
+	const onFileInputChange = (e: any) => {
+		console.log("Hey!!!", e);
+		// const files = e.target.files;
+		const files = [
+			props.w1_Input,
+			props.w2_Input,
+			props.w3_Input,
+			props.w4_Input,
+			props.w5_Input,
+		].map(inp => inp.files).filter((fls: any) => fls.length > 0).map(fls => fls![0]);
+		console.log("Files", files);
 		const count = files.length;
 		if (count > 5 || count < 1) {
 			return;
 		}
 
-		const background = loadImage([
+		const background: any = loadImage([
 			props.w1,
 			props.w2,
 			props.w3,
@@ -234,15 +246,19 @@ export function CreateWallpapersGenerator(props: CreateWallpapersGeneratorProps)
 
 		draw(wrapper, background, images).then((wrapper) => {
 			return html2canvas(wrapper, {
-				// width: 2400,
-				// height: 1600,
 				scale: 1,
 			});
 		})
 		.then(function(canvas) {
 			props.resultImage.src = (canvas as HTMLCanvasElement).toDataURL();
 		});
-	});
+	}
+
+	props.w1_Input.addEventListener("change", onFileInputChange);
+	props.w2_Input.addEventListener("change", onFileInputChange);
+	props.w3_Input.addEventListener("change", onFileInputChange);
+	props.w4_Input.addEventListener("change", onFileInputChange);
+	props.w5_Input.addEventListener("change", onFileInputChange);
 }
 
 

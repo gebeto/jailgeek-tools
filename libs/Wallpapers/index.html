@@ -3,10 +3,19 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Test</title>
+	<style>
+		input[type="file"] {
+			display: block;
+		}
+	</style>
 </head>
 <body>
-
-	<input id="wallpapers" type="file" multiple>
+	
+	<input id="wallpaper-1" type="file">
+	<input id="wallpaper-2" type="file">
+	<input id="wallpaper-3" type="file">
+	<input id="wallpaper-4" type="file">
+	<input id="wallpaper-5" type="file">
 
 	<div>
 		<img width="500" class="result-image" id="result-image">
@@ -15,14 +24,19 @@
 	<script src="WallpapersGenerator.js"></script>
 	<script>
 		CreateWallpapersGenerator({
-			fileInput: document.getElementById("wallpapers"),
-			resultImage: document.getElementById("result-image"),
+			w1_Input: document.getElementById("wallpaper-1"),
+			w2_Input: document.getElementById("wallpaper-2"),
+			w3_Input: document.getElementById("wallpaper-3"),
+			w4_Input: document.getElementById("wallpaper-4"),
+			w5_Input: document.getElementById("wallpaper-5"),
 
 			w1: "assets/w_1.png",
 			w2: "assets/w_2.png",
 			w3: "assets/w_3.png",
 			w4: "assets/w_4.png",
 			w5: "assets/w_5.png",
+
+			resultImage: document.getElementById("result-image"),
 		});
 </script>
 </body>
