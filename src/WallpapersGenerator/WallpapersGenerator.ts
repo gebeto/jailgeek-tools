@@ -60,9 +60,9 @@ export function generateWallpapers_1(wrapper: HTMLElement, imgs: Array<HTMLImage
 
 	const img1 = createImgWrapper(imgs[0], Orientation.Landscape, {
 		width: 2050,
-		height: 1150,
+		height: 1160,
 		left: 160,
-	    top: 447,
+	    top: 440,
 	});
 	wrapper.appendChild(img1);
 }
@@ -73,7 +73,7 @@ export function generateWallpapers_2(wrapper: HTMLElement, imgs: Array<HTMLImage
 		width: 2050,
 		height: 954,
 		left: 160,
-		top: 645,
+		top: 647,
 	});
 	wrapper.appendChild(img1);
 
@@ -134,7 +134,7 @@ export function generateWallpapers_4(wrapper: HTMLElement, imgs: Array<HTMLImage
 	const img3 = createImgWrapper(imgs[2], Orientation.Portrait, {
 		width: 818,
 		height: 1640,
-		left: 1422,
+		left: 1424,
 		top: 580,
 	});
 	wrapper.appendChild(img3);
@@ -177,7 +177,7 @@ export function generateWallpapers_5(wrapper: HTMLElement, imgs: Array<HTMLImage
 	const img4 = createImgWrapper(imgs[3], Orientation.Portrait, {
 		width: 818,
 		height: 1640,
-		left: 1134,
+		left: 1136,
 		top: 645,
 	});
 	wrapper.appendChild(img4);
