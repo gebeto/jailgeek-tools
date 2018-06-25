@@ -21,7 +21,12 @@ export interface CreateWallpapersGeneratorProps {
 }
 
 export function createImgWrapper(img: HTMLImageElement, orientation: Orientation, opts?: any) {
+	if (img.width / 2 > img.height) {
+		orientation = Orientation.Portrait;
+	}
+
 	img.className = orientation;
+
 	const imgWrapper = document.createElement("div");
 	imgWrapper.className = "wallpapers__img-wrapper";
 	imgWrapper.appendChild(img);
@@ -40,12 +45,13 @@ export function createImgWrapper(img: HTMLImageElement, orientation: Orientation
 			const c = -((width - opts.width) / 2);
 			img.style.left = `${c}px`;
 		} else if (orientation === Orientation.Landscape) {
-			// const divider = img.width / opts.width;
-			// let height = Math.round(img.height / divider);
-			// const c = -((height - opts.height) / 2);
-			// img.style.top = `${c}px`;
+			const divider = img.width / opts.width;
+			let height = Math.round(img.height / divider);
+			const c = -((height - opts.height) / 2);
+			img.style.top = `${c}px`;
 		}
 	}
+	// console.log();
 	return imgWrapper;
 }
 
