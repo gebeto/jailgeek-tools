@@ -28,10 +28,10 @@ export function CreatePostGenerator(props: CreatePostGeneratorProps) {
 
 
 	injectFonts([{
-		family: "SF Display",
+		family: "SF Display Heavy",
 		url: props.postFontPath,
 	}, {
-		family: "Archive",
+		family: "SF Display Bold",
 		url: props.hashFontPath,
 	}]);
 
@@ -46,11 +46,12 @@ export function CreatePostGenerator(props: CreatePostGeneratorProps) {
 
 	// BG
 	const img = document.createElement("img");
+	img.width = 1500;
 	img.src = props.backgroundImagePath;
 
 	const tag = document.createElement("span");
 	tag.className = "post__tag";
-	tag.textContent = "#";
+	tag.textContent = "";
 
 	const text = document.createElement("span");
 	text.className = "post__text";
@@ -89,7 +90,7 @@ export function CreatePostGenerator(props: CreatePostGeneratorProps) {
 	});
 
 	tagInput.addEventListener(getEventType(tagInput), function(e) {
-		tag.innerHTML = "#" + generateText(tagInput.value);
+		tag.innerHTML = generateText(tagInput.value);
 		offsetableUpdateCanvas.withOffset();
 	});
 
