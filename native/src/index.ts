@@ -1,7 +1,7 @@
 import backgroundImage from './assets/post-bg.png';
 import testImage from './assets/test.png';
 
-import fontSFDisplay from './assets/SFUIDisplayBlack.otf';
+import fontSFDisplay from './assets/SFUIDisplay-Black.otf';
 import fontArchive from './assets/Archive.otf';
 
 import { CreatePostGenerator } from './PostGenerator';

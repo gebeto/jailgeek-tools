@@ -4,7 +4,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const bundleConfig = {
 	entry: path.resolve(__dirname, "src/index.ts"),
-	output: "bundle.js",
+	output: "../../dist/bundle.js",
 	isLib: false,
 }
 
@@ -13,13 +13,14 @@ if (process.env.npm_lifecycle_event === "lib") {
 		Post: path.resolve(__dirname, "src/PostGenerator/PostGenerator.ts"),
 		Wallpapers: path.resolve(__dirname, "src/WallpapersGenerator/WallpapersGenerator.ts"),
 	};
-	bundleConfig.output = "../libs/[name]/[name]Generator.js";
+	bundleConfig.output = "../../libs/[name]/[name]Generator.js";
 	bundleConfig.isLib = true;
 }
 
 const config = {
 	entry: bundleConfig.entry,
 	output: {
+		// path: path.resolve(__dirname, "../../dist"),
 		path: path.resolve(__dirname, "dist"),
 		filename: bundleConfig.output,
 	},
@@ -63,10 +64,6 @@ const config = {
 			filename: "./index.html",
 		}),
 	],
-
-	// externals: {
-	// 	html2canvas: 'html2canvas',
-	// }
 };
 
 module.exports = config;

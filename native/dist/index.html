@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="user-scalable=no, width=device-width">
+	<title>Jailgeek tools</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
+	<style>
+		#post-wrapper canvas,
+		#post-wrapper img,
+		#result-image {
+			width: 100%;
+		}
+	</style>
+
+</head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Jailgeek tools</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#post">Пост</a></li>
+				<li><a href="#message">Page 2</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container-fluid" data-tab="post">
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label>Текст</label>
+					<textarea row="3" placeholder="Текст" class="form-control"></textarea>
+					<div class="col-sm-12 text-muted">
+						<ul>
+							<li>*Слово* что б выделить текст синим цветом</li>
+						</ul>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Тег</label>
+					<input row="3" placeholder="Тег" class="form-control" />
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary">Generate</button>
+				</div>
+				<div class="content-wrapper"></div>
+			</div>
+			<div class="col-sm-6">
+				<img id="result-image">
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript" src="../../dist/bundle.js"></script></body>
+</html>

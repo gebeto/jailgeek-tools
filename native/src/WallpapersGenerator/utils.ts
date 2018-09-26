@@ -5,7 +5,7 @@ export function loadImageFromFile(file: any) {
 			const fr = new FileReader();
 			fr.onload = function () {
 				const img = document.createElement("img");
-				img.src = fr.result;
+				img.src = fr.result as string;
 				resolve(img);
 			}
 			fr.readAsDataURL(file);
